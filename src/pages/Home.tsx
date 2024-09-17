@@ -1,9 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "primeicons/primeicons.css";
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 
+interface Recipe {
+    id: number;
+    name: string;
+    ingredients: string[];
+    instructions: string[];
+    prepTimeMinutes: number;
+    cookTimeMinutes: number;
+    servings: number;
+    difficulty: string;
+    cuisine: string;
+    caloriesPerServing: number;
+    tags: string[];
+    userId: number;
+    image: string;
+    rating: number;
+    reviewCount: number;
+    mealType: string[];
+  }
+  
+  interface RecipeResponse {
+    recipes: Recipe[];
+    total: number;
+    skip: number;
+    limit: number;
+  }
+  
+
 const Home = () => {
+    const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    // Fetching recipes from DummyJSON API
+    fetch("https://dummyjson.com/recipes")
+      .then((response) => response.json())
+      .then((data: RecipeResponse) => {
+        setRecipes(data.recipes); // Extracting and setting the recipes array
+      })
+      .catch((error) => console.error("Error fetching recipes:", error));
+  }, []);
+
   return (
     <div>
       <div
@@ -76,7 +117,7 @@ const Home = () => {
               style={{
                 width: "100%",
                 padding: "8px 16px 8px 130px", // Extra left padding to make space for the button
-                border: "1px solid gray",
+                border: "1px solid #E5E7EB",
                 borderRadius: "9999px",
                 boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
                 outline: "none",
@@ -152,7 +193,29 @@ const Home = () => {
         />
       </div>
 
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "20px" }}>
+
+      <div className="cards" style={{marginTop:'50px' , display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "33px", width:'80%' }}>
+        {recipes.map((recipe) => (
+          
+          <Card key={recipe.id} className="Card" style={{ width: '20rem'}}>
+          <Card.Img variant="top" src={recipe.image} style={{ borderRadius: '5px', width: '100%', borderBottomLeftRadius: '0px', borderBottomRightRadius: '0px'  }} />
+          <Card.Body style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="title-and-reviews" style={{ display:"flex", justifyContent:"space-between"}}>
+                <span>{recipe.name}</span>
+                <span style={{backgroundColor:'#84BD00', padding:'2px 5px'}}>Reviews: {recipe.reviewCount}</span>
+              </div>
+              <div className="time-and-mealtype" style={{ display:"flex", justifyContent:"space-between"}}>
+                <span>{recipe.prepTimeMinutes} mins</span>
+                <span>{recipe.mealType}</span>
+              </div>
+          </Card.Body>
+      </Card>
+        ))}
+      </div>
+        </div>
     </div>
+
   );
 };
 
