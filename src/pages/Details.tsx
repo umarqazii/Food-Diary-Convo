@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "primeicons/primeicons.css";
 import { FcOk } from "react-icons/fc";
+import { Audio } from "react-loader-spinner";
 import Card from "react-bootstrap/Card";
-import '@fontsource/montserrat/600.css'; 
+import "@fontsource/montserrat/600.css";
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 import footerimg from "../assets/Rectangle 48.png";
@@ -33,6 +34,7 @@ const RecipeDetails = () => {
 
   useEffect(() => {
     // Fetching recipe by ID from DummyJSON API
+    
     fetch(`https://dummyjson.com/recipes/${id}`)
       .then((response) => response.json())
       .then((data: Recipe) => {
@@ -49,7 +51,7 @@ const RecipeDetails = () => {
 
   return (
     <div style={{ width: "100%" }}>
-        <div
+      <div
         className="logo and searchbar"
         style={{
           display: "flex",
@@ -94,8 +96,7 @@ const RecipeDetails = () => {
               display: "flex",
               alignItems: "center",
             }}
-          >
-          </div>
+          ></div>
         </div>
 
         {/* Empty Area */}
@@ -137,10 +138,42 @@ const RecipeDetails = () => {
             padding: "0",
           }}
         >
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Home</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Explore</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Help</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Profile</li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Home
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Explore
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Help
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Profile
+          </li>
         </ul>
         <hr
           style={{
@@ -151,31 +184,84 @@ const RecipeDetails = () => {
           }}
         />
       </div>
-    <div className='recipe' style={{}}>
-      {recipe ? (
-        <div className='recipe-container' style={{display:'flex'}}>
-
-          <div className='recipe-details' style={{ width:'50%', height:'auto', padding:'20px', borderRadius:'10px', margin:'20px', display:'flex', justifyContent:'center', alignItems:'center'}}>
-            <div style={{backgroundColor:'#E5E7EB', width:'60%', padding:'15px', borderRadius:'10px'}}>
-            <h2>{recipe.name}</h2>
-            {/* recipe instructions concatenated */}
-            <p>{recipe.instructions.join('\n')}</p><br></br>
-            <h3>Ingredients</h3>
-            <hr style={{width:'100%', color:'gray'}} />
-            {recipe.ingredients.map((ingredient) => (
-              <p><FcOk /> {"  "} {ingredient}</p>
-            ))}
+      <div className="recipe" style={{}}>
+        {recipe ? (
+          <div className="recipe-container" style={{ display: "flex" }}>
+            <div
+              className="recipe-details"
+              style={{
+                width: "50%",
+                height: "auto",
+                padding: "20px",
+                borderRadius: "10px",
+                margin: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "#E5E7EB",
+                  width: "60%",
+                  padding: "15px",
+                  borderRadius: "10px",
+                }}
+              >
+                <h2>{recipe.name}</h2>
+                {/* recipe instructions concatenated */}
+                <p>{recipe.instructions.join("\n")}</p>
+                <br></br>
+                <h3>Ingredients</h3>
+                <hr style={{ width: "100%", color: "gray" }} />
+                {recipe.ingredients.map((ingredient) => (
+                  <p>
+                    <FcOk /> {"  "} {ingredient}
+                  </p>
+                ))}
+              </div>
             </div>
 
+            <div
+              className="recipe-image"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "50%",
+                height: "auto",
+              }}
+            >
+              <img
+                src={recipe.image}
+                alt="recipe"
+                style={{ width: "70%", borderRadius: "100%" }}
+              />
+            </div>
           </div>
-
-          <div className='recipe-image' style={{display:'flex', justifyContent:'center', alignItems:'center', width:'50%', height:'auto'}}>
-            <img src={recipe.image} alt="recipe" style={{width:'70%', borderRadius:'100%'}}/>
-          </div>
-        </div>
-      ) : (
-        <p>Loading recipe details...</p>
-      )}
+        ) : (
+          <>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  height: "8rem",
+                  width: "8rem",
+                  borderRadius: "50%",
+                  borderBottom: "2px solid black",
+                  animation: "spin 1s linear infinite",
+                }}
+              ></div>
+            </div>
+            <style>
+              {`
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`}
+            </style>
+          </>
+        )}
       </div>
       {/* Footer Image */}
       <div
@@ -199,14 +285,16 @@ const RecipeDetails = () => {
           }}
         />
         <h2
-        style={{
-          color: "white",
-          position: "absolute",
-          bottom: "10px",
-          left: "100px", // Adjust positioning as needed
-          zIndex: 1, // Ensure it's above the image
-        }}
-        >All rights reserved</h2>
+          style={{
+            color: "white",
+            position: "absolute",
+            bottom: "10px",
+            left: "100px", // Adjust positioning as needed
+            zIndex: 1, // Ensure it's above the image
+          }}
+        >
+          All rights reserved
+        </h2>
       </div>
     </div>
   );
