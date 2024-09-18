@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <div style={{backgroundColor:'black', display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
+    <div style={{backgroundColor:'black', display:'flex', flexDirection:'row', justifyContent:'space-around', width:'100%'}}>
         <div>
             <ul style={{display:'flex', flexDirection:'row', gap: '50px', listStyleType: 'none', padding: '0'}} >
                 <li style={{color:'white'}}>Community</li>
