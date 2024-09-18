@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "primeicons/primeicons.css";
-import '@fontsource/montserrat/500.css'; 
+import "@fontsource/montserrat/500.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 import footerimg from "../assets/Rectangle 48.png";
@@ -114,7 +115,16 @@ const Home = () => {
                 justifyContent: "center",
               }}
             >
-              <span style={{ fontSize: "20px", fontWeight: "500", fontFamily: "Montserrat, sans-serif", color:'black' }}>All Categories</span>
+              <span
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  fontFamily: "Montserrat, sans-serif",
+                  color: "black",
+                }}
+              >
+                All Categories
+              </span>
             </button>
 
             {/* Input Field */}
@@ -123,7 +133,7 @@ const Home = () => {
               placeholder="Search"
               style={{
                 width: "100%",
-                padding: "8px 16px 8px 130px",
+                padding: "8px 16px 8px 190px",
                 border: "1px solid #E5E7EB",
                 borderRadius: "9999px",
                 boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
@@ -201,10 +211,42 @@ const Home = () => {
             padding: "0",
           }}
         >
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Home</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Explore</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Help</li>
-          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Profile</li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Home
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Explore
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Help
+          </li>
+          <li
+            style={{
+              color: "#84BD00",
+              fontSize: "20px",
+              fontFamily: "Montserrat, sans-serif",
+            }}
+          >
+            Profile
+          </li>
         </ul>
         <hr
           style={{
@@ -238,18 +280,36 @@ const Home = () => {
           }}
         >
           {recipes.map((recipe) => (
-            <Card key={recipe.id} className="Card" style={{ width: "20rem", cursor: "pointer" }}
+            <Card
+            key={recipe.id}
+            className="Card"
+            style={{
+              width: "20rem",
+              cursor: "pointer",
+              marginTop: "50px",
+              transition: "transform 0.3s ease", // Add smooth transition
+            }}
             onClick={() => navigate(`/recipe-details/${recipe.id}`)}
-            >
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")} // Scale up on hover
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}   // Reset scale when not hovering
+          >
               <Card.Img
                 variant="top"
                 src={recipe.image}
                 style={{ borderRadius: "5px", width: "100%" }}
               />
-              <Card.Body style={{ display: "flex", flexDirection: "column" }}>
+              <Card.Body
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <div
                   className="title-and-reviews"
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <span>{recipe.name}</span>
                   <span
@@ -260,10 +320,38 @@ const Home = () => {
                 </div>
                 <div
                   className="time-and-mealtype"
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
                   <span>{recipe.prepTimeMinutes} mins</span>
-                  <span>{recipe.mealType}</span>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span>{recipe.mealType.join("/")}</span>
+                    <div style={{ display: "flex", alignItems: "right" }}>
+                      {Array.from(
+                        { length: Math.floor(recipe.rating) },
+                        (_, i) => (
+                          <FaStar
+                            key={i}
+                            style={{ color: "#FFD700", marginRight: "2px" }}
+                          />
+                        )
+                      )}
+
+                      {/* Render half star if rating includes .5 */}
+                      {recipe.rating % 1 !== 0 && (
+                        <FaStarHalfAlt
+                          style={{ color: "#FFD700", marginRight: "2px" }}
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </Card.Body>
             </Card>
@@ -293,14 +381,16 @@ const Home = () => {
           }}
         />
         <h2
-        style={{
-          color: "white",
-          position: "absolute",
-          bottom: "10px",
-          left: "100px", // Adjust positioning as needed
-          zIndex: 1, // Ensure it's above the image
-        }}
-        >All rights reserved</h2>
+          style={{
+            color: "white",
+            position: "absolute",
+            bottom: "10px",
+            left: "100px", // Adjust positioning as needed
+            zIndex: 1, // Ensure it's above the image
+          }}
+        >
+          All rights reserved
+        </h2>
       </div>
     </div>
   );

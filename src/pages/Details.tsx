@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "primeicons/primeicons.css";
 import { FcOk } from "react-icons/fc";
@@ -31,6 +32,8 @@ interface Recipe {
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null); // Initialize with `null` to indicate no data initially
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetching recipe by ID from DummyJSON API
@@ -75,7 +78,9 @@ const RecipeDetails = () => {
             alignItems: "center",
           }}
         >
-          <img src={logo} alt="logo" style={{ width: "40%" }} />
+          <img src={logo} alt="logo" style={{ width: "40%", cursor: "pointer" }} 
+          onClick={() => {navigate("/")}}
+          />
         </div>
 
         {/* Search Bar Section */}
@@ -143,7 +148,9 @@ const RecipeDetails = () => {
               color: "#84BD00",
               fontSize: "20px",
               fontFamily: "Montserrat, sans-serif",
+              cursor: "pointer",
             }}
+            onClick={() => {navigate("/")}}
           >
             Home
           </li>
@@ -152,7 +159,9 @@ const RecipeDetails = () => {
               color: "#84BD00",
               fontSize: "20px",
               fontFamily: "Montserrat, sans-serif",
+              cursor: "pointer",
             }}
+            onClick={() => {navigate("/")}}
           >
             Explore
           </li>
