@@ -1,20 +1,24 @@
 import React from 'react';
+import '@fontsource/montserrat/700.css'; 
+import "primeicons/primeicons.css";
 
 const Navbar = () => {
   return (
     <div style={{backgroundColor:'black', display:'flex', flexDirection:'row', justifyContent:'space-around', width:'100%'}}>
         <div>
             <ul style={{display:'flex', flexDirection:'row', gap: '50px', listStyleType: 'none', padding: '0'}} >
-                <li style={{color:'white'}}>Community</li>
-                <li style={{color:'white'}}>Books</li>
-                <li style={{color:'white'}}>Recipe Index</li>
-                <li style={{color:'white'}}>Popular</li>
+                <li style={{color:'white', fontSize:'10px', fontFamily: 'Montserrat, sans-serif'}}>Community</li>
+                <li style={{color:'white', fontSize:'10px', fontFamily: 'Montserrat, sans-serif'}}>Books</li>
+                <li style={{color:'white', fontSize:'10px', fontFamily: 'Montserrat, sans-serif'}}>Recipe Index</li>
+                <li style={{color:'white', fontSize:'10px', fontFamily: 'Montserrat, sans-serif'}}>Popular</li>
             </ul>
         </div>
         <div>
             <ul style={{display:'flex', flexDirection:'row', gap: '50px', listStyleType: 'none', padding: '0'}}>
-                <li style={{color:'white'}}>Register</li>
-                <li style={{color:'white'}}>Login</li>
+                <li style={{color:'white', fontFamily: 'Montserrat, sans-serif', fontSize:'10px'}}><i className="pi pi-sign-in"
+                style={{ fontSize: "10px", color: "#509E2F" }}></i> &nbsp; Register</li>
+                <li style={{color:'white', fontFamily: 'Montserrat, sans-serif', fontSize:'10px'}}><i className="pi pi-user"
+                style={{ fontSize: "10px", color: "#509E2F" }}></i> &nbsp; Login</li>
             </ul>
         </div>
     </div>

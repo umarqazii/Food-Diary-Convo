@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "primeicons/primeicons.css";
+import '@fontsource/montserrat/500.css'; 
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import logo from "../assets/CP-Logo 1.png";
@@ -33,6 +35,7 @@ interface RecipeResponse {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -111,7 +114,7 @@ const Home = () => {
                 justifyContent: "center",
               }}
             >
-              <span style={{ fontSize: "14px" }}>All Categories</span>
+              <span style={{ fontSize: "20px", fontWeight: "500", fontFamily: "Montserrat, sans-serif", color:'black' }}>All Categories</span>
             </button>
 
             {/* Input Field */}
@@ -198,10 +201,10 @@ const Home = () => {
             padding: "0",
           }}
         >
-          <li style={{ color: "#84BD00", fontSize: "20px" }}>Home</li>
-          <li style={{ color: "#84BD00", fontSize: "20px" }}>Explore</li>
-          <li style={{ color: "#84BD00", fontSize: "20px" }}>Help</li>
-          <li style={{ color: "#84BD00", fontSize: "20px" }}>Profile</li>
+          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Home</li>
+          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Explore</li>
+          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Help</li>
+          <li style={{ color: "#84BD00", fontSize: "20px", fontFamily: 'Montserrat, sans-serif' }}>Profile</li>
         </ul>
         <hr
           style={{
@@ -235,7 +238,9 @@ const Home = () => {
           }}
         >
           {recipes.map((recipe) => (
-            <Card key={recipe.id} className="Card" style={{ width: "20rem" }}>
+            <Card key={recipe.id} className="Card" style={{ width: "20rem", cursor: "pointer" }}
+            onClick={() => navigate(`/recipe-details/${recipe.id}`)}
+            >
               <Card.Img
                 variant="top"
                 src={recipe.image}
