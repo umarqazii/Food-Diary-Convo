@@ -1,4 +1,4 @@
-# Guessing Game 
+# CookPal
 
 This is a React-based application for a recipe website. The API fetches all the recipes and displays them on the home screen. Each recipe is displayed in the form of a clickable card. Clicking on a recipe routes you to a page that displays the details of that particular recipe. This application is made as an assessment for internship application of Convo.
 
