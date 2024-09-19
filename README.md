@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# Guessing Game 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based application for a recipe website. The API fetches all the recipes and displays them on the home screen. Each recipe is displayed in the form of a clickable card. Clicking on a recipe routes you to a page that displays the details of that particular recipe. This application is made as an assessment for internship application of Convo.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Appealing Design
+- Fetching recipes from API
+- Displaying Details of each recipe
+- Custom Hook for responsiveness
+- Lazy loading for heavy components
 
+## Technologies Used
+
+- **React.js**: Frontend library for building user interfaces.
+- **TypeScript**: Language developed by Microsoft that adds static typing with optional type annotations to JavaScript
+- **CSS**: For styling the UI components.
+- **Vercel**: Game is deployed on vercel. Feel free to play on desktop or your mobile phone
+
+## How to run the Code
+
+- Step 1
+open command prompt and type:
+### `git clone https://github.com/umarqazii/Food-Diary-Convo.git`
+
+- Step 2
+### `cd Food-Diary-Convo`
+
+- Step 3
+### `npm install`
+
+- Step 4
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## The game is deployed to Vercel
+[Deployment link](https://food-diary-delta-nine.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
