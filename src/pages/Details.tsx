@@ -3,57 +3,44 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "primeicons/primeicons.css";
 import { FcOk } from "react-icons/fc";
-import { Audio } from "react-loader-spinner";
-import Card from "react-bootstrap/Card";
+import Navbar from '../components/Navbar';
 import "@fontsource/montserrat/600.css";
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 import footerimg from "../assets/Rectangle 48.png";
-
-interface Recipe {
-  id: number;
-  name: string;
-  ingredients: string[];
-  instructions: string[];
-  prepTimeMinutes: number;
-  cookTimeMinutes: number;
-  servings: number;
-  difficulty: string;
-  cuisine: string;
-  caloriesPerServing: number;
-  tags: string[];
-  userId: number;
-  image: string;
-  rating: number;
-  reviewCount: number;
-  mealType: string[];
-}
+import { useResponsive } from "../hooks/useResponsive";
+import { Recipe } from "../utils/interfaces";
+import { fetchRecipeById } from "../utils/apis";
 
 const RecipeDetails = () => {
-  const [recipe, setRecipe] = useState<Recipe | null>(null); // Initialize with `null` to indicate no data initially
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
   const { id } = useParams();
-
   const navigate = useNavigate();
+  const breakpoints = [610]; // Example breakpoints: small, medium, large screens
+  const breakpointIndex = useResponsive(breakpoints);
 
   useEffect(() => {
-    // Fetching recipe by ID from DummyJSON API
+    const fetchRecipe = async () => {
+      const fetchedRecipe = await fetchRecipeById(id);
+      setRecipe(fetchedRecipe);
+    };
     
-    fetch(`https://dummyjson.com/recipes/${id}`)
-      .then((response) => response.json())
-      .then((data: Recipe) => {
-        setRecipe(data);
-      })
-      .catch((error) => console.error("Error fetching recipe:", error));
-  }, [id]); // Add `id` as a dependency to trigger the effect when `id` changes
+    fetchRecipe(); // Call the function
+  }, [id]);
 
-  useEffect(() => {
-    if (recipe) {
-      console.log(recipe); // This will log the updated recipe when the state changes
-    }
-  }, [recipe]); // This effect runs when `recipe` state changes
 
   return (
-    <div style={{ width: "100%" }}>
+    <>
+    {breakpointIndex === 0 && (
+      <>
+      <h2>Responsiveness not Adjusted for Screens smaller than 610px as we weren't given a design for smaller screens (Used Custom Hook for this)</h2>
+      </>
+    )}
+
+    {breakpointIndex === 1 && (
+      <>
+      <Navbar />
+      <div style={{ width: "100%" }}>
       <div
         className="logo and searchbar"
         style={{
@@ -195,7 +182,7 @@ const RecipeDetails = () => {
       </div>
       <div className="recipe" style={{}}>
         {recipe ? (
-          <div className="recipe-container" style={{ display: "flex" }}>
+          <div className="recipe-container" style={{ display: "flex"}}>
             <div
               className="recipe-details"
               style={{
@@ -286,10 +273,10 @@ const RecipeDetails = () => {
           src={logo}
           alt=""
           style={{
-            width: "200px",
+            width: "15%",
             position: "absolute",
-            bottom: "60px",
-            left: "100px", // Adjust positioning as needed
+            bottom: "25%",
+            left: "10%", // Adjust positioning as needed
             zIndex: 1, // Ensure it's above the image
           }}
         />
@@ -297,15 +284,21 @@ const RecipeDetails = () => {
           style={{
             color: "white",
             position: "absolute",
-            bottom: "10px",
-            left: "100px", // Adjust positioning as needed
+            bottom: "0%",
+            left: "10%", // Adjust positioning as needed
             zIndex: 1, // Ensure it's above the image
+            fontFamily: "Montserrat, sans-serif",
+            fontSize:'2vw'
           }}
         >
           All rights reserved
         </h2>
       </div>
     </div>
+    </>
+    )}
+    
+    </>
   );
 };
 

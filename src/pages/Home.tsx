@@ -1,56 +1,44 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "primeicons/primeicons.css";
 import "@fontsource/montserrat/500.css";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 import footerimg from "../assets/Rectangle 48.png";
+import Navbar from "../components/Navbar";
+import { fetchRecipes } from "../utils/apis";
+import { Recipe } from "../utils/interfaces";
+import { useResponsive } from "../hooks/useResponsive";
 
-interface Recipe {
-  id: number;
-  name: string;
-  ingredients: string[];
-  instructions: string[];
-  prepTimeMinutes: number;
-  cookTimeMinutes: number;
-  servings: number;
-  difficulty: string;
-  cuisine: string;
-  caloriesPerServing: number;
-  tags: string[];
-  userId: number;
-  image: string;
-  rating: number;
-  reviewCount: number;
-  mealType: string[];
-}
-
-interface RecipeResponse {
-  recipes: Recipe[];
-  total: number;
-  skip: number;
-  limit: number;
-}
 
 const Home = () => {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const breakpoints = [610]; // Example breakpoints: small, medium, large screens
+  const breakpointIndex = useResponsive(breakpoints);
 
   useEffect(() => {
     // Fetching recipes from DummyJSON API
-    fetch("https://dummyjson.com/recipes")
-      .then((response) => response.json())
-      .then((data: RecipeResponse) => {
+    fetchRecipes()
+      .then((data) => {
         setRecipes(data.recipes); // Extracting and setting the recipes array
       })
       .catch((error) => console.error("Error fetching recipes:", error));
   }, []);
 
   return (
-    <div style={{ width: "100%" }}>
+    <>
+    {breakpointIndex === 0 && (
+      <>
+      <h2>Responsiveness not Adjusted for Screens smaller than 610px as we weren't given a design for smaller screens (Used Custom Hook for this)</h2>
+      </>
+    )}
+    {breakpointIndex === 1 && (
+      <>
+      <Navbar />
+      <div style={{ width: "100%" }}>
       <div
         className="logo and searchbar"
         style={{
@@ -139,6 +127,9 @@ const Home = () => {
                 boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
                 outline: "none",
                 transition: "box-shadow 0.3s ease",
+                fontFamily: "Montserrat, sans-serif",
+                fontSize:'20px',
+                fontWeight: "700",
               }}
               onFocus={(e) => (e.target.style.boxShadow = "0 0 0 3px #3B82F6")}
               onBlur={(e) =>
@@ -296,7 +287,7 @@ const Home = () => {
               <Card.Img
                 variant="top"
                 src={recipe.image}
-                style={{ borderRadius: "5px", width: "100%" }}
+                style={{ borderRadius: "5px", width: "100%", height: "300px" }}
               />
               <Card.Body
                 style={{
@@ -373,10 +364,10 @@ const Home = () => {
           src={logo}
           alt=""
           style={{
-            width: "200px",
+            width: "15%",
             position: "absolute",
-            bottom: "60px",
-            left: "100px", // Adjust positioning as needed
+            bottom: "25%",
+            left: "10%", // Adjust positioning as needed
             zIndex: 1, // Ensure it's above the image
           }}
         />
@@ -384,15 +375,22 @@ const Home = () => {
           style={{
             color: "white",
             position: "absolute",
-            bottom: "10px",
-            left: "100px", // Adjust positioning as needed
+            bottom: "0%",
+            left: "10%", // Adjust positioning as needed
             zIndex: 1, // Ensure it's above the image
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: 400,
+            fontSize:'2vw'
           }}
         >
           All rights reserved
         </h2>
       </div>
     </div>
+      </>
+    )}
+    
+    </>
   );
 };
 
