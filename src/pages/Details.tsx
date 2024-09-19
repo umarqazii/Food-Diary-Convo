@@ -5,6 +5,7 @@ import "primeicons/primeicons.css";
 import { FcOk } from "react-icons/fc";
 import Navbar from '../components/Navbar';
 import "@fontsource/montserrat/600.css";
+import phone from "../assets/rotate.gif"
 import logo from "../assets/CP-Logo 1.png";
 import bannerimg from "../assets/cropped-pistaciafood_11 1.png";
 import footerimg from "../assets/Rectangle 48.png";
@@ -32,9 +33,35 @@ const RecipeDetails = () => {
   return (
     <>
     {breakpointIndex === 0 && (
-      <>
-      <h2>Responsiveness not Adjusted for Screens smaller than 610px as we weren't given a design for smaller screens (Used Custom Hook for this)</h2>
-      </>
+     <>
+     <div style={{ 
+ width: "100vw", 
+ display: "flex", 
+ justifyContent: "center", 
+ alignItems: "center", 
+ height: "100vh", 
+ flexDirection: "column", 
+}}>
+ <div style={{
+   width: '100%', 
+   padding: "10px", 
+   display: 'flex', 
+   justifyContent: 'center' 
+ }}>
+   <img src={phone} alt="" style={{ width: '100%', maxWidth: '300px', border: '1px solid black' }} />
+ </div>
+ 
+ <div style={{
+   width: '100%', 
+   padding: "10px", 
+   textAlign: "center", 
+   justifyContent: "center", 
+   alignItems: "center"
+ }}>
+   <p style={{padding: '10px'}}><b>Note:</b> This website is not responsive for screens smaller than 610px as we were not given the design for smaller screens <i>(This functionality of rendering completely different elements on different screen sizes is done using a Custom Hook)</i></p>
+ </div>
+</div>
+</>
     )}
 
     {breakpointIndex === 1 && (
